@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import '../style/Event.css'
+import '../style/Event.css';
+
+// ✅ Dynamically select base URL
+const API_BASE = import.meta.env.PROD
+  ? "/api"
+  : "http://localhost:5000/api";
 
 function EventList() {
   const [events, setEvents] = useState([]);
   const [bookingInputs, setBookingInputs] = useState({}); // Track input per event
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_BASE_URL}/events`)
+    axios.get(`${API_BASE}/events`)
       .then((res) => setEvents(res.data))
       .catch(console.error);
   }, []);
@@ -29,7 +34,7 @@ function EventList() {
       return;
     }
 
-    axios.post(`${import.meta.env.VITE_API_BASE_URL}/book`, {
+    axios.post(`${API_BASE}/book`, {
       user_name: booking.user_name,
       event_id: eventId,
       tickets: Number(booking.tickets)
@@ -41,34 +46,33 @@ function EventList() {
       });
   };
 
- return (
-  <div className="event-container">
-    <h1 className="event-title">Events</h1>
-    {events.map(e => (
-      <div key={e.id} className="event-card">
-        <h3>{e.name}</h3>
-        <p>{e.description}</p>
-        <p>Date: {e.date}</p>
-        <p>Available Tickets: {e.available_tickets}</p>
+  return (
+    <div className="event-container">
+      <h1 className="event-title">Events</h1>
+      {events.map(e => (
+        <div key={e.id} className="event-card">
+          <h3>{e.name}</h3>
+          <p>{e.description}</p>
+          <p>Date: {e.date}</p>
+          <p>Available Tickets: {e.available_tickets}</p>
 
-        <input
-          type="text"
-          placeholder="Your Name"
-          value={bookingInputs[e.id]?.user_name || ""}
-          onChange={ev => handleInputChange(e.id, "user_name", ev.target.value)}
-        />
-        <input
-          type="number"
-          min="1"
-          value={bookingInputs[e.id]?.tickets || ""}
-          onChange={ev => handleInputChange(e.id, "tickets", ev.target.value)}
-        />
-        <button onClick={() => handleBook(e.id)}>Book</button>
-      </div>
-    ))}
-  </div>
-);
-
+          <input
+            type="text"
+            placeholder="Your Name"
+            value={bookingInputs[e.id]?.user_name || ""}
+            onChange={ev => handleInputChange(e.id, "user_name", ev.target.value)}
+          />
+          <input
+            type="number"
+            min="1"
+            value={bookingInputs[e.id]?.tickets || ""}
+            onChange={ev => handleInputChange(e.id, "tickets", ev.target.value)}
+          />
+          <button onClick={() => handleBook(e.id)}>Book</button>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default EventList;
