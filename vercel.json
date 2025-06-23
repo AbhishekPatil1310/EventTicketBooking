@@ -11,15 +11,7 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "backend/app.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "frontEnd/dist/index.html"
-    }
-  ],
-  "buildCommand": "cd frontEnd && npm install && npm run build",
-  "outputDirectory": "frontEnd/dist"
+    { "src": "/api/(.*)", "dest": "backend/app.py" },
+    { "src": "/(.*)", "dest": "/frontEnd/dist/index.html" }
+  ]
 }
