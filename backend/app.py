@@ -1,18 +1,15 @@
 from flask import Flask
 from flask_cors import CORS
-from routes import booking_routes  # Make sure routes/booking_routes.py exists
+from routes import booking_routes
 
 app = Flask(__name__)
-# In app.py
-CORS(app, resources={r"/api/*": {"origins": "*"}})
-
-
+CORS(app)
 app.register_blueprint(booking_routes)
 
-# ✅ For Vercel: expose a WSGI-compatible `handler`
+# For Vercel
 def handler(environ, start_response):
     return app.wsgi_app(environ, start_response)
 
-# ✅ For local development
+# For local dev
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
