@@ -4,7 +4,7 @@ from routes import booking_routes  # Make sure routes/booking_routes.py exists
 
 app = Flask(__name__)
 # In app.py
-CORS(app, resources={r"/api*": {"origins": "*"}})
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
 app.register_blueprint(booking_routes)
