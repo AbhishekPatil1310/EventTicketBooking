@@ -3,10 +3,7 @@
   "builds": [
     {
       "src": "frontEnd/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "frontEnd/dist"
-      }
+      "use": "@vercel/static-build"
     },
     {
       "src": "backend/app.py",
@@ -20,7 +17,9 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/frontEnd/index.html"
+      "dest": "frontEnd/dist/index.html"
     }
-  ]
+  ],
+  "buildCommand": "cd frontEnd && npm install && npm run build",
+  "outputDirectory": "frontEnd/dist"
 }
