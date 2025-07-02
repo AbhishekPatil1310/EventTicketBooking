@@ -2,14 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import '../style/Event.css';
 
-// ✅ Dynamically select base URL
-const API_BASE = import.meta.env.PROD
-  ? "/api"
-  : "http://localhost:5000/api";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
 function EventList() {
   const [events, setEvents] = useState([]);
-  const [bookingInputs, setBookingInputs] = useState({}); // Track input per event
+  const [bookingInputs, setBookingInputs] = useState({});
 
   useEffect(() => {
     axios.get(`${API_BASE}/events`)
