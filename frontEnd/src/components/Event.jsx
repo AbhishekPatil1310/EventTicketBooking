@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import '../style/Event.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
 
 function EventList() {
   const [events, setEvents] = useState([]);
