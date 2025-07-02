@@ -8,7 +8,7 @@ app = Flask(__name__)
 # ✅ Allow both local and deployed frontend URLs
 CORS(app, origins=[
     "http://localhost:5173",  # Local Vite dev
-    "https://event-ticket-booking-v98x-702tg90bp-abhisheks-projects-680a2fd9.vercel.app"  # Your deployed frontend
+    "https://event-ticket-booking-v98x-abhisheks-projects-680a2fd9.vercel.app/"  # Your deployed frontend
 ])
 
 # Register routes
